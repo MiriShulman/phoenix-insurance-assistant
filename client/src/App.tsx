@@ -2,6 +2,9 @@
 import { useState, type FormEvent } from 'react'
 import './App.css'
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000'
+
 type Source = {
   title: string
   url: string
@@ -46,7 +49,7 @@ function App() {
     setLoading(true)
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/chat', {
+      const response = await fetch(`${API_BASE_URL}/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

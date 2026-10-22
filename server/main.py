@@ -1,4 +1,4 @@
-
+import os
 from pathlib import Path
 import json
 import re
@@ -9,9 +9,18 @@ from pydantic import BaseModel
 
 app = FastAPI(title="Phoenix Assistant API")
 
+CORS_ORIGINS = os.getenv(
+    "CORS_ORIGINS",
+    "http://localhost:5173",
+)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=[
+        origin.strip()
+        for origin in CORS_ORIGINS.split(",")
+        if origin.strip()
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
