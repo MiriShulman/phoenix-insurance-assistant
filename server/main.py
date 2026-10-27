@@ -314,6 +314,47 @@ TOPIC_RULES = {
         ),
     },
 
+    "home_insurance_overview": {
+        # Broad questions should prefer the general home-insurance page, not
+        # an incident-specific article that merely contains the words "ביטוח דירה".
+        "title_cues": (
+            "ביטוח דירה",
+            "ביטוח הדירה",
+            "ביטוח דירה ועוד הרחבות",
+        ),
+        "evidence_cues": (
+            "פוליסת ביטוח דירה",
+            "ביטוח מבנה",
+            "ביטוח תכולה",
+            "מבנה ותכולה",
+            "תכולת הדירה",
+            "ביטוח צד ג",
+            "ביטוח צד ג'",
+        ),
+        "sentence_cues": (
+            "פוליסת ביטוח דירה",
+            "ביטוח מבנה",
+            "ביטוח תכולה",
+            "מבנה ותכולה",
+            "תכולת הדירה",
+            "ביטוח צד ג",
+            "ביטוח צד ג'",
+        ),
+        "exclude_titles": (
+            "נשיכת כלב",
+            "כלבים",
+            "נזקי מים וצנרת",
+            "נזקי צנרת",
+            "הצפה בבית",
+            "ביטוח כל הסיכונים",
+            "ביטוח תכולה בתקופת מלחמה",
+        ),
+        "search_phrases": (
+            "ביטוח דירה מבנה תכולה צד ג",
+            "ביטוח דירה מה כולל",
+            "פוליסת ביטוח דירה מבנה ותכולה",
+        ),
+    },
     "accident_first_steps": {
         "title_cues": ("מה עושים במקרה של תאונת דרכים", "מה עושים אחרי תאונה"),
         "evidence_cues": ("החליפו פרטים", "פרטי הנהגים", "צלמו את הנזקים", "תיעוד האירוע",
@@ -596,6 +637,28 @@ def classify_question_topic(question: str) -> str:
                                  "אחרי תאונת דרכים")):
         return "accident_first_steps"
 
+    # A general home-insurance question needs the product overview page. Do not
+    # classify a specific incident (for example, a dog bite) as a broad overview.
+    home_insurance_terms = (
+        "ביטוח דירה", "ביטוח הדירה", "פוליסת דירה", "פוליסת ביטוח דירה",
+        "ביטוח מבנה", "ביטוח תכולה",
+    )
+    broad_coverage_terms = (
+        "מה מכסה", "מה מכסים", "מה כולל", "מה כוללת", "מה נכלל",
+        "מה נותן", "מה נותנת", "כיסוי", "כולל",
+    )
+    specific_incident_terms = (
+        "נשיכת כלב", "נשיכה", "כלב", "כלבים", "נזילה", "צנרת",
+        "הצפה", "שיטפון", "נזקי מים", "פריצה", "גניבה", "שריפה",
+        "סערה", "רעידת אדמה", "שבר", "תכשיט שנגנב",
+    )
+    if (
+        any(term in q for term in home_insurance_terms)
+        and any(term in q for term in broad_coverage_terms)
+        and not any(term in q for term in specific_incident_terms)
+    ):
+        return "home_insurance_overview"
+
     return ""
 
 
@@ -803,6 +866,10 @@ def topic_fallback_answer(topic: str) -> str:
     fallbacks = {
         "theft_coverage": "לא מצאתי במאגר קטע ממוקד שמאשר את הכיסוי לגניבת רכב בביטוח מקיף. יש לבדוק את תנאי הפוליסה והסייגים.",
         "glass_coverage": "לא מצאתי במאגר מקור ממוקד שמבהיר אם הפוליסה כוללת כיסוי לשמשות. בדקי אם מופיע בפוליסה כיסוי או שירות שמשות.",
+        "home_insurance_overview": (
+            "לא מצאתי במאגר מקור כללי מספיק על ביטוח דירה. בדרך כלל חשוב לבדוק בנפרד "
+            "את כיסוי המבנה, התכולה והאם נכלל כיסוי צד ג׳, וכן את ההרחבות והחריגים בפוליסה שלך."
+        ),
                 "water_leak_cost": (
             "לא מצאתי במאגר מקור שמאשר אם עלות המים שהתבזבזו בעקבות נזילה מכוסה. "
             "חשוב להבחין בין כיסוי לנזקי צנרת לבין החזר על חשבון המים עצמו. "
@@ -1698,6 +1765,24 @@ def compose_topic_answer(
     evidence = normalize_text(evidence)
     source = next((item for item in sources if (item.get("snippet") or "").strip()), None)
     title = (source.get("title") if source else "") or "המקור שנמצא באתר הפניקס"
+
+    if topic == "home_insurance_overview":
+        has_structure_evidence = any(term in evidence for term in (
+            "ביטוח מבנה", "ביטוח תכולה", "מבנה ותכולה",
+            "פוליסת ביטוח דירה נחלקת",
+        ))
+        if not has_structure_evidence:
+            return topic_fallback_answer(topic)
+
+        answer = (
+            "לפי המידע הכללי באתר הפניקס, ביטוח דירה מתחלק לביטוח מבנה ולביטוח תכולה. "
+            "ביטוח מבנה מתייחס למבנה הדירה, וביטוח תכולה לרכוש שנמצא בתוכה. "
+            "בחלק מהפוליסות מופיע גם כיסוי צד ג׳, בהתאם לתנאי הפוליסה ולכיסויים שנרכשו. "
+            "הכיסוי בפועל, סכומי הביטוח, ההרחבות והחריגים נקבעים לפי הפוליסה הספציפית, "
+            "לכן כדאי לבדוק את דף פרטי הביטוח ואת תנאיו. "
+            f"המקור המרכזי שנמצא: '{title}'."
+        )
+        return answer
 
     if topic == "theft_coverage":
         if any(term in evidence for term in ("גניבה", "גניבת", "נגנב")) and ("מקיף" in q or "מקיף" in evidence):
