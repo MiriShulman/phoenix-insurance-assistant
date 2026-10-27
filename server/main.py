@@ -35,7 +35,7 @@ class ChatRequest(BaseModel):
 
 def normalize_text(text: str) -> str:
     text = (text or "").lower()
-    return re.sub(r"\s+", " ", text.replace("׳", "'").replace("’", "'")).strip()
+    return re.sub(r"\s+", " ", text.replace("׳", "'").replace("’", "'").replace("״", '"')).strip()
 
 
 def tokenize(text: str) -> list[str]:
@@ -355,6 +355,39 @@ TOPIC_RULES = {
             "פוליסת ביטוח דירה מבנה ותכולה",
         ),
     },
+    "health_insurance_overlap": {
+        # Route questions about overlap between private health insurance and the
+        # health-fund supplementary plan to the article that compares these systems.
+        "title_cues": (
+            "מסתמכים על קופות החולים בביטוחי הבריאות",
+            "קופות החולים בביטוחי הבריאות",
+            "כפל ביטוח בריאות",
+            "ביטוח בריאות פרטי וקופת חולים",
+        ),
+        "evidence_cues": (
+            "קופת החולים", "קופות החולים", "ביטוחי הבריאות",
+            "ביטוח בריאות פרטי", "חברת הביטוח הפרטית",
+            "ביטוח משלים", "שב\"ן", "שבן",
+            "הרחבת הביטוח", "השתלות", "ניתוחים",
+        ),
+        "sentence_cues": (
+            "קופת החולים", "קופות החולים", "ביטוחי הבריאות",
+            "ביטוח בריאות פרטי", "חברת הביטוח הפרטית",
+            "ביטוח משלים", "שב\"ן", "שבן",
+            "הרחבת הביטוח", "השתלות", "ניתוחים",
+            "כפל ביטוח", "כיסוי כפול",
+        ),
+        "exclude_titles": (
+            "ביטוח נסיעות", "נסיעות לחו\"ל", "מחלות כרוניות",
+            "קופת גמל", "ביטוח רכב", "ביטוח דירה",
+        ),
+        "search_phrases": (
+            "מסתמכים על קופות החולים בביטוחי הבריאות",
+            "כפל ביטוח בריאות קופת חולים ביטוח פרטי",
+            "ביטוח משלים שב\"ן ביטוח בריאות פרטי",
+            "הרחבת הביטוח מעבר לביטוח שמספקות קופות החולים",
+        ),
+    },
     "accident_first_steps": {
         "title_cues": ("מה עושים במקרה של תאונת דרכים", "מה עושים אחרי תאונה"),
         "evidence_cues": ("החליפו פרטים", "פרטי הנהגים", "צלמו את הנזקים", "תיעוד האירוע",
@@ -475,6 +508,31 @@ def classify_question_topic(question: str) -> str:
         term in q for term in insurance_context_terms
     ):
         return "out_of_scope"
+
+    # Private health insurance vs. the supplementary health-fund plan (שב"ן).
+    # Keep this separate from travel insurance and from generic insurance queries.
+    health_fund_terms = (
+        "קופת חולים", "קופת החולים", "קופות החולים",
+        "ביטוח משלים", "המשלים של קופת החולים", "משלים של קופת החולים",
+        "שב\"ן", "שבן",
+    )
+    overlap_terms = (
+        "כפל ביטוח", "כפל ביטוחי", "כפל כיסויים", "כיסוי כפול",
+        "כיסויים כפולים", "חפיפה", "חופף", "מול", "לעומת",
+        "ביחס", "בהשוואה", "בנוסף", "מעבר", "ההבדל",
+    )
+    private_health_terms = (
+        "ביטוח בריאות פרטי", "ביטוחי הבריאות", "ביטוח פרטי",
+        "חברת הביטוח הפרטית", "ביטוח בריאות",
+    )
+    if any(term in q for term in health_fund_terms) and (
+        any(term in q for term in overlap_terms)
+        or (
+            any(term in q for term in private_health_terms)
+            and any(term in q for term in ("כדאי", "צריך", "נחוץ", "כדאיות"))
+        )
+    ):
+        return "health_insurance_overlap"
 
     if any(term in q for term in ("מספר הטלפון", "מספר טלפון", "טלפון")) and any(
         term in q for term in (
@@ -672,6 +730,29 @@ def page_has_topic_evidence(page: dict, topic: str) -> bool:
     if any(cue in title for cue in rule.get("exclude_titles", ())):
         return False
 
+    if topic == "health_insurance_overlap":
+        # The direct Phoenix article title is strong evidence. Otherwise require
+        # evidence of both systems, not just generic mentions of insurance.
+        if any(cue in title for cue in rule.get("title_cues", ())):
+            return True
+        health_fund_cues = (
+            "קופת החולים", "קופות החולים", "ביטוח משלים",
+            "השב\"ן", "שב\"ן", "שבן",
+        )
+        private_insurance_cues = (
+            "ביטוחי הבריאות", "ביטוח בריאות פרטי", "ביטוח פרטי",
+            "חברת הביטוח הפרטית", "הביטוח הפרטי",
+        )
+        benefit_cues = (
+            "כיסוי", "מכוסה", "הרחבת הביטוח", "השתלה", "השתלות",
+            "ניתוח", "ניתוחים",
+        )
+        return (
+            any(cue in body for cue in health_fund_cues)
+            and any(cue in body for cue in private_insurance_cues)
+            and any(cue in body for cue in benefit_cues)
+        )
+
     if topic == "weather_flood_contents":
         # A title such as "הצפה בבית" is not enough on its own: the body must
         # actually discuss contents, plus either storm/weather or flooding.
@@ -764,6 +845,30 @@ def topic_sentence_matches(sentence: str, topic: str, question: str = "") -> boo
     rule = TOPIC_RULES.get(topic, {})
     if not any(cue in normalized for cue in rule.get("sentence_cues", ())):
         return False
+
+    if topic == "health_insurance_overlap":
+        health_fund_cues = (
+            "קופת החולים", "קופות החולים", "ביטוח משלים",
+            "השב\"ן", "שב\"ן", "שבן",
+        )
+        private_or_coverage_cues = (
+            "ביטוחי הבריאות", "ביטוח בריאות", "ביטוח פרטי",
+            "חברת הביטוח", "הרחבת הביטוח", "כיסוי", "מכוסה",
+            "ניתוח", "השתלה",
+        )
+        has_health_fund_and_private_or_coverage = (
+            any(cue in normalized for cue in health_fund_cues)
+            and any(cue in normalized for cue in private_or_coverage_cues)
+        )
+        has_private_claim_example = (
+            any(cue in normalized for cue in (
+                "חברת הביטוח הפרטית", "חברת הביטוח", "ביטוח פרטי",
+            ))
+            and any(cue in normalized for cue in (
+                "השתל", "השתלות", "ניתוח", "ניתוחים", "כיסוי", "מכוסה",
+            ))
+        )
+        return has_health_fund_and_private_or_coverage or has_private_claim_example
 
     if topic == "vehicle_recovered":
         direct_recovery_phrases = (
@@ -869,6 +974,11 @@ def topic_fallback_answer(topic: str) -> str:
         "home_insurance_overview": (
             "לא מצאתי במאגר מקור כללי מספיק על ביטוח דירה. בדרך כלל חשוב לבדוק בנפרד "
             "את כיסוי המבנה, התכולה והאם נכלל כיסוי צד ג׳, וכן את ההרחבות והחריגים בפוליסה שלך."
+        ),
+        "health_insurance_overlap": (
+            "לא מצאתי במאגר מקור שמשווה ישירות בין ביטוח הבריאות הפרטי לבין הביטוח המשלים "
+            "של קופת החולים. לכן איני יכול לקבוע אם קיימת חפיפה או כפל ביטוח; צריך להשוות "
+            "את הכיסויים והתנאים בשני המסלולים."
         ),
                 "water_leak_cost": (
             "לא מצאתי במאגר מקור שמאשר אם עלות המים שהתבזבזו בעקבות נזילה מכוסה. "
@@ -1765,6 +1875,31 @@ def compose_topic_answer(
     evidence = normalize_text(evidence)
     source = next((item for item in sources if (item.get("snippet") or "").strip()), None)
     title = (source.get("title") if source else "") or "המקור שנמצא באתר הפניקס"
+
+    if topic == "health_insurance_overlap":
+        has_health_fund_context = any(term in evidence for term in (
+            "קופת החולים", "קופות החולים", "ביטוח משלים", "שב\"ן", "שבן",
+        ))
+        has_private_context = any(term in evidence for term in (
+            "ביטוחי הבריאות", "ביטוח בריאות פרטי", "ביטוח פרטי",
+            "חברת הביטוח הפרטית", "הביטוח הפרטי",
+        ))
+        has_benefit_context = any(term in evidence for term in (
+            "כיסוי", "מכוסה", "הרחבת הביטוח", "ניתוח", "ניתוחים",
+            "השתלה", "השתלות",
+        ))
+        if not (has_health_fund_context and has_private_context and has_benefit_context):
+            return topic_fallback_answer(topic)
+
+        return (
+            "ייתכן שיש חפיפה בין ביטוח בריאות פרטי לבין הביטוח המשלים של קופת החולים, "
+            "אבל אי אפשר לקבוע מהמקור הזה אם יש כפל ביטוח בפועל. המאמר באתר הפניקס מתאר "
+            "מקרים שבהם ביטוח פרטי סיפק כיסוי להשתלה או לטיפול שלא קיבל מענה מקופת החולים, "
+            "וממליץ לבחון כיסוי פרטי נוסף. עם זאת, הוא אינו משווה סעיף-סעיף בין פוליסה פרטית "
+            "לבין מסלול השב\"ן, ולכן אינו מוכיח שאין כפילות. כדי לבדוק את המקרה שלך, יש "
+            "להשוות את הכיסויים, התקרות, החריגים ותנאי המימוש בשני המסלולים. "
+            f"המקור שנמצא: '{title}'."
+        )
 
     if topic == "home_insurance_overview":
         has_structure_evidence = any(term in evidence for term in (
