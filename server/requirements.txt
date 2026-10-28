@@ -4,3 +4,6 @@ uvicorn[standard]
 requests
 beautifulsoup4
 truststore
+scikit-learn>=1.5,<2.0
+chromadb>=0.5.23,<2.0.0
+fastembed>=0.6,<1.0

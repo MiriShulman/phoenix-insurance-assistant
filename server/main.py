@@ -1,11 +1,19 @@
 import json
 import os
 import re
+from functools import lru_cache
 from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+
+try:
+    from .rag_retrieval import retrieve_relevant_chunks
+    from .llm_answer import generate_grounded_answer
+except ImportError:  # Supports running as: uvicorn main:app from the server folder.
+    from rag_retrieval import retrieve_relevant_chunks
+    from llm_answer import generate_grounded_answer
 
 app = FastAPI(title="Phoenix Assistant API")
 
@@ -31,13 +39,40 @@ STOPWORDS = {
 
 class ChatRequest(BaseModel):
     question: str
+    history: list[dict[str, str]] = Field(default_factory=list)
 
 
+def contextualize_follow_up(question: str, history: list[dict[str, str]]) -> str:
+    """Add the last user question to short follow-ups for better retrieval."""
+    normalized = normalize_text(question)
+    follow_up_cues = (
+        "ומה לגבי", "ומה עם", "ומה במקרה", "ומה אז", "ומה בנוגע",
+        "האם זה", "האם גם", "וזה", "וכמה זה", "ומה צריך במקרה כזה",
+        "במקרה כזה", "ואם כן", "ואם לא", "זה מכסה", "זה כולל",
+    )
+    is_short = len(re.findall(r"[א-תA-Za-z0-9]+", normalized)) <= 3
+    looks_like_follow_up = is_short or any(cue in normalized for cue in follow_up_cues)
+    if not looks_like_follow_up:
+        return question
+
+    previous_user_question = ""
+    for item in reversed(history[-8:]):
+        if item.get("role") == "user":
+            previous_user_question = str(item.get("content", item.get("text", ""))).strip()
+            if previous_user_question:
+                break
+    if previous_user_question and normalize_text(previous_user_question) != normalized:
+        return f"{previous_user_question} {question}".strip()
+    return question
+
+
+@lru_cache(maxsize=12000)
 def normalize_text(text: str) -> str:
     text = (text or "").lower()
     return re.sub(r"\s+", " ", text.replace("׳", "'").replace("’", "'").replace("״", '"')).strip()
 
 
+@lru_cache(maxsize=12000)
 def tokenize(text: str) -> list[str]:
     words = re.findall(r"[א-תA-Za-z0-9]+", normalize_text(text))
     return [word for word in words if len(word) > 1 and word not in STOPWORDS]
@@ -93,6 +128,7 @@ def classify_intent(question: str) -> str:
 
     contact_phrases = (
         "ליצור קשר", "יצירת קשר", "צור קשר", "צרו קשר", "איך ליצור קשר",
+        "יוצרים קשר", "איך יוצרים קשר", "איך אפשר ליצור קשר", "אני רוצה ליצור קשר",
         "שירות לקוחות", "מוקד", "מספר הטלפון", "מספר טלפון", "טלפון של", "כתובת של",
         "אימייל", "דואר אלקטרוני", "מייל של", "נציג שירות", "פנו אליכם",
     )
@@ -1263,6 +1299,7 @@ def page_has_damage_report_evidence(page: dict) -> bool:
 
 
 
+@lru_cache(maxsize=20000)
 def _hebrew_variants(word: str) -> set[str]:
     """Small, conservative set of Hebrew word forms for search matching."""
     word = normalize_text(word)
@@ -1285,6 +1322,7 @@ def _hebrew_variants(word: str) -> set[str]:
     return {v for v in variants if len(v) >= 3}
 
 
+@lru_cache(maxsize=100000)
 def term_matches(word: str, term: str) -> bool:
     if word == term:
         return True
@@ -1293,6 +1331,7 @@ def term_matches(word: str, term: str) -> bool:
     return bool(_hebrew_variants(word) & _hebrew_variants(term))
 
 
+@lru_cache(maxsize=3000)
 def clean_page_text(text: str) -> str:
     """Remove late related-article/navigation tails from Phoenix's scraped text."""
     clean = re.sub(r"\s+", " ", (text or "")).strip()
@@ -2955,13 +2994,23 @@ def root():
 @app.get("/health")
 def health():
     pages = load_pages()
-    return {"status": "ok", "pages_loaded": len(pages)}
+    llm_configured = bool(
+        (os.getenv("LLM_API_KEY", "").strip() or os.getenv("OPENAI_API_KEY", "").strip())
+        and os.getenv("LLM_MODEL", "").strip()
+    )
+    return {
+        "status": "ok",
+        "pages_loaded": len(pages),
+        "retrieval": "local-tfidf-chunks",
+        "llm_configured": llm_configured,
+    }
 
 
 
 @app.post("/chat")
 def chat(request: ChatRequest):
-    question = (request.question or "").strip()
+    original_question = (request.question or "").strip()
+    question = contextualize_follow_up(original_question, request.history or [])
     topic = classify_question_topic(question)
     if topic == "out_of_scope":
         return {
@@ -2977,22 +3026,64 @@ def chat(request: ChatRequest):
     pages = load_pages()
     if not pages:
         return {
-            "answer": "לא הצלחתי לטעון את קובץ הדפים. בדקי שקובץ pages.jsonl קיים בתיקיית data.",
+            "answer": "לא הצלחתי לטעון את קובץ הדפים. בדקי שקובץ pages_crawled_clean.jsonl קיים בתיקיית data.",
             "sources": [],
         }
 
-    ranked = sorted(
-        (
-            (score_page(page, direct_terms, extra_phrases, question), page)
-            for page in pages
-        ),
-        key=lambda item: item[0],
-        reverse=True,
-    )
-
+    # Build a local chunk-level retrieval result. This requires no API key and is
+    # cached in memory after the first request. Existing intent/topic safeguards
+    # below remain in place for high-risk and well-known question types.
+    rag_matches = retrieve_relevant_chunks(question, pages, top_k=8)
+    rag_by_url = {item["url"]: item for item in rag_matches}
     normalized_question = normalize_text(question)
     intent = classify_intent(normalized_question)
     topic = classify_question_topic(normalized_question)
+    use_rag_ranking = topic not in TOPIC_RULES and intent == "general"
+    rag_weight = 14.0 if use_rag_ranking else 0.0
+
+    def combined_page_score(page: dict) -> float:
+        base_score = score_page(page, direct_terms, extra_phrases, question)
+        rag_score = float(rag_by_url.get(page.get("url", ""), {}).get("score", 0.0))
+        if use_rag_ranking:
+            # For general questions, relevance of the retrieved chunk is the primary
+            # signal; old hand-written rules only act as a small tie-breaker.
+            if rag_score < 0.045:
+                return min(base_score * 0.05, 0.5)
+
+            title = normalize_text(page.get("title", ""))
+            q = normalize_text(question)
+            asks_claim = any(term in q for term in ("תביעה", "תביעות", "הגשת", "להגיש", "טופס תביעה"))
+            adjusted_rag_score = rag_score
+            if not asks_claim and any(term in title for term in ("תביעות", "הגשת תביעה", "טופס תביעה")):
+                adjusted_rag_score *= 0.62
+            if not any(term in q for term in ("חו\"ל", "חול", "נסיעות", "נסיעה")) and any(term in title for term in ("לחו\"ל", "נסיעות לחו\"ל")):
+                adjusted_rag_score *= 0.78
+            if any(term in title for term in ("טיפים מאמרים וכתבות", "מאמרים נוספים", "כתבות נוספות")):
+                adjusted_rag_score *= 0.70
+            # Prefer a product/overview page when the question asks broadly what a
+            # named insurance product includes, rather than a specific claims article.
+            if any(cue in q for cue in ("מה כולל", "מה מכסה", "מה זה", "מהו", "מהי")):
+                product_phrases = (
+                    "ביטוח בריאות", "ביטוח חובה", "ביטוח מקיף", "ביטוח צד ג",
+                    "ביטוח דירה", "ביטוח רכב", "ביטוח יומי", "ביטוח נסיעות",
+                )
+                if any(phrase in q and phrase in title for phrase in product_phrases):
+                    adjusted_rag_score += 0.045
+            return 5.0 + (30.0 * adjusted_rag_score) + (min(base_score, 20.0) * 0.02)
+        return base_score + rag_weight * rag_score
+
+    if use_rag_ranking and (not rag_matches or float(rag_matches[0].get("score", 0.0)) < 0.065):
+        return {
+            "answer": "לא מצאתי במידע שנאסף מאתר הפניקס מקור מספיק רלוונטי כדי לענות בביטחון. אפשר לנסח את השאלה אחרת או לבדוק מול שירות הלקוחות.",
+            "sources": [],
+            "generation": "no-evidence",
+        }
+
+    ranked = sorted(
+        ((combined_page_score(page), page) for page in pages),
+        key=lambda item: item[0],
+        reverse=True,
+    )
 
     # Specific topics must be backed by pages that actually discuss that subject.
     # This takes precedence over broad intents such as "claim_process".
@@ -3343,7 +3434,11 @@ def chat(request: ChatRequest):
     sources = []
     seen_snippet_evidence: list[str] = []
     for _, page in relevant:
-        if intent == "claim_documents" and topic not in TOPIC_RULES:
+        if use_rag_ranking and page.get("url", "") in rag_by_url:
+            # Cite the retrieved chunk itself, not a possibly unrelated excerpt
+            # selected from elsewhere in the full page.
+            snippet = str(rag_by_url[page.get("url", "")].get("text", "")).strip()[:700]
+        elif intent == "claim_documents" and topic not in TOPIC_RULES:
             snippet = make_claim_documents_snippet(page, question)
         else:
             snippet = make_snippet(page.get("text", ""), direct_terms, extra_phrases, question)
@@ -3394,5 +3489,20 @@ def chat(request: ChatRequest):
             "snippet": "",
         }]
 
+    # If an OpenAI-compatible model is configured, use it as the grounded RAG
+    # generator. Without a key/model, keep the existing deterministic answer path.
+    if sources:
+        llm_evidence = [
+            {"title": source.get("title", ""), "url": source.get("url", ""), "text": source.get("snippet", "")}
+            for source in sources
+        ]
+        llm_answer = generate_grounded_answer(
+            original_question or question,
+            llm_evidence,
+            history=request.history or [],
+        )
+        if llm_answer:
+            return {"answer": llm_answer, "sources": sources, "generation": "llm-rag"}
+
     answer = compose_answer(question, relevant_pages, sources)
-    return {"answer": answer, "sources": sources}
+    return {"answer": answer, "sources": sources, "generation": "local-grounded-fallback"}

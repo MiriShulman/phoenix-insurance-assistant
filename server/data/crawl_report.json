@@ -1,0 +1,718 @@
+{
+  "started_at": "2026-10-24T20:07:07.888903+00:00",
+  "start_url": "https://www.fnx.co.il/",
+  "sitemaps_found": 3,
+  "sitemaps_read": 1,
+  "urls_discovered_from_sitemaps": 1643,
+  "urls_discovered_from_links": 980,
+  "fetched_html": 1239,
+  "fetched_pdf": 0,
+  "saved_records": 867,
+  "duplicate_content_skipped": 124,
+  "short_or_empty_pages_skipped": 218,
+  "robots_disallowed": 4,
+  "http_errors": 172,
+  "network_errors": 0,
+  "unsupported_content_skipped": 1210,
+  "noindex_pages_skipped": 30,
+  "pdf_extraction_errors": 0,
+  "errors": [
+    {
+      "url": "https://www.fnx.co.il/sitemap_index.xml",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/sitemap-index.xml",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/travel-insurance/travel_information/advanced-travel-insurance-app/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/ביטוח-רכב/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/en/car-insurance/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/ביטוח-דירה/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/טיפים/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/מה-חדש/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/ביטוח-מקיף/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/ביטוח-חובה/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/מושגים/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/ביטוח-לסוגי-רכב-שונים/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/חוקים/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/מיגון-רכבים/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/נהג-צעיר/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/ביטוח-אופנועים/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/ביטוח-צד-ג/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/רכב-חשמלי/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/ביטוח-נסיעות-לחול/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/הפעלה-ותביעות/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/יעדים-תיירותיים/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/אקסטרים/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/קורונה/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/ביטוח-תכולה/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/ביטוח-מבנה/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/ביטוח-צד-ג-לדירה/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/דירה-שכורה/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/ביטוח-בריאות-פרטי/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/נכות-מתאונה/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/ביטוח-חיים-למשכנתא/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/ביטוח-לחיות-מחמד/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/ביטוחים-נוספים/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/בטיחות/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/ביטוח-חיים/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/ביטוח-מחלות-קשות/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/tags/ביטוח-בריאות-מומלץ/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-health-insurance/קבלת-החזר-על-טיפולי-פיזיותרפיה/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-health-insurance/קבלת-החזר-על-התייעצות-עם-רופא-מומחה/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-health-insurance/קבלת-החזר-על-טיפולים-אלטרנטיביים/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-health-insurance/קבלת-החזר-על-הוצאות-רפואיות-שאינן-באשפוז/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-health-insurance/קבלת-החזר-על-ניתוח/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-health-insurance/קבלת-החזר-על-תרופה-שאינה-כלולה-בסל-הבריאות/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-health-insurance/תביעה-בביטוח-מחלות-קשות/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-health-insurance/אישור-לניתוח-עתידי/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-supportive-insurance/הגשת-תביעת-ביטוח-סיעודי-פרטי-בהפניקס/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-supportive-insurance/הגשת-תביעת-ביטוח-סיעודי-דרך-מכבי/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-car-insurance/claims-vehicle-third-party-property/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-car-insurance/תביעה-במקרה-של-תאונה-ברכב-פרטי/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-car-insurance/בקשה-למוסך-הסדר-מבוטח-הפניקס/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-car-insurance/בקשה-לאישור-אי-הגשה/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-all-embracing-pension/תביעה-במקרה-של-פנסיית-נכות/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-all-embracing-pension/תביעה-במקרה-של-פנסיית-שאירים/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-all-embracing-pension/משיכת-כספים-מחשבון-עמית-שנפטר-עם-יתרה-נמוכה-מ-9-624/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-all-embracing-pension/תביעה-לתשלום-קצבה-לשאירי-פנסיונר/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-all-embracing-pension/בקשה-לקצבת-זקנה/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-life-insurance/תביעה-במקרה-של-אובדן-כושר-עבודה/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-life-insurance/תביעה-במקרה-פטירה/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-life-insurance/תביעה-במקרה-של-נכות-מתאונה/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-life-insurance/בקשה-למשיכת-כספים-מפוליסת-מבוטח-שנפטר-עם-יתרה-נמוכה/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/pension-benefits/בקשה-לקצבת-זקנה-לאחר-גיל-פרישה-פנסיה-ותיקה-עמית-יסוד/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/pension-benefits/בקשה-לקצבת-זקנה-לאחר-גיל-פרישה-פנסיה-מקיפה-ומשלימה/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/pension-benefits/בקשה-לקצבת-שאירים-לאחר-פטירת-הפנסיונר-פנסיה-מקיפה-ומשלימה/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/pension-benefits/בקשה-לקצבת-שאירים-לאחר-פטירת-הפנסיונר-פנסיה-ותיקה-עמית-יסוד/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-travel-abroad/קבלת-החזר-על-הוצאות-רפואיות-לא-בזמן-אשפוז/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-travel-abroad/בקשה-לפיצוי-במקרה-של-אובדן-או-גניבת-מזוודה-בחול/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-travel-abroad/בקשה-לפיצוי-במקרה-של-איחור-מזוודה/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-travel-abroad/בקשה-לפיצוי-במקרה-של-ביטול-או-קיצור-נסיעה-בגלל-אירוע-רפואי/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-travel-abroad/קבלת-החזר-על-הוצאות-רפואיות-בזמן-אשפוז/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-travel-abroad/טיפול-חירום-בשיניים/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-travel-abroad/נושאים-אחרים/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/claims-customer-service/claims-car-insurance-third-party/תביעה-במקרה-שרכב-שמבוטח-בפניקס-פגע-בי/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/en/404en/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/en/private-equity/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/investor-relations/presentations-reports-and-press-releases/nustro-all/תרומת-השקעות-נוסטרו-רבעון-3-2025/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/en/magazine/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/career/open-positions/open-position/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/en/sitemap/",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/terms-of-sale/car-takanon-with-buyme.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/smart-pets-mills-takanon.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/terms-of-sale/takanon-fnx-lupa-travel0623.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/terms-of-sale/takanon-smart-kobra.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/terms-of-sale/takanon-fnx-steimatzky.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/travel/more-lucrative",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/travel/travel-smart-app",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/siud/meuhedet/meuhedet_siud_kisuichange0219.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/10000/meuhedet-health.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/10000/meuhedet-health0717.pdf",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/fnx-notice-mizug-apollo1124.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/xnes-docs/Daf%20Mutzar%20Gemel%20Hashkaa_2022.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/polarchive/Gemel/%d7%a0%d7%a1%d7%a4%d7%97-%d7%a4%d7%93%d7%99%d7%95%d7%9f-%d7%95%d7%94%d7%a2%d7%91%d7%a8%d7%94-%d7%9c%d7%a7%d7%95%d7%a4%d7%aa-%d7%92%d7%9e%d7%9c-%d7%a2%d7%9c-%d7%a4%d7%99-%d7%aa%d7%99%d7%a7%d7%95%d7%9f-190%5b1%5d.pdf",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/boi.org.il/he/NewsAndPublications/PressReleases/Pages/24-12-2019.aspx",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/xnes-docs/tikrat-hafkadot-gemel_2025.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/notice-from-slice-to-fnx-merging0125.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/zman-prisha-tesuot_0726.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/siud/mc/claims_Igeret_MC_Siudi_brochure.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/doclib/tehunot_hishiyot.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/claims/red_line.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/doclib/makif_dira_tzad.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/DocLib/300104345_sheerim-tviot-Roles-122019-WEB.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/doclib/tviot_new_makifa_site.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/doclib/choveret_tviot_new_makifa_site.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/claims/hovrot-clalim/choveret_aklalim_2011.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/claims/hovrot-clalim/hoveret_clalim_mleaa_tviut_2012.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/claims/class-actions/%D7%94%D7%A1%D7%93%D7%A8%20%D7%A4%D7%A9%D7%A8%D7%94%2055899-07-15.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/claims/class-actions/%D7%A4%D7%A1%D7%A7%20%D7%93%D7%99%D7%9F%2055899-07-15.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/claims/class-actions/%D7%94%D7%A1%D7%93%D7%A8_%D7%A4%D7%A9%D7%A8%D7%94_%D7%A0%D7%A7%D7%99_%D7%95%D7%A1%D7%95%D7%A4%D7%99-%D7%AA%D7%A6-2108-02-16.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/claims/class-actions/29430002-1_%D7%94%D7%97%D7%9C%D7%98%D7%94-%D7%9E%D7%99%D7%95%D7%9D-5-12-2023.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/%D7%94%D7%A4%D7%A0%D7%99%D7%A7%D7%A1-%D7%99%D7%A9%D7%9B%D7%99%D7%9C-%D7%91%D7%A7%D7%A9%D7%94-%D7%9C%D7%90%D7%99%D7%A9%D7%95%D7%A8-%D7%94%D7%A1%D7%93%D7%A8-%D7%94%D7%A4%D7%A9%D7%A8%D7%94-%D7%94%D7%9E%D7%AA%D7%95%D7%A7%D7%9F-%D7%A2%D7%9D-%D7%A0%D7%A1%D7%A4%D7%97%D7%99%D7%9D.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/business/FNXPAY_04-5-23-mungash.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/alternativeinvestments/investmentvalidation",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/career/open-positions/50008722",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/amanat-sherut.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/mashkiim/2013b.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/mashkiim/fnx-mediniut-tagmul31-11-22v14-years2021-2023.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/TsuotExcellence/excellence_tavlat_tsuot-07-2026.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/pension_gemel/Hodaa-Hashuva-Amitim-MAY-22.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/pension_gemel/hodaa-hashuva-amitim-transfer-kupot140222.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/halman-merger-ad.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/pension_gemel/2022-453-halman-cancel.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/documents/mizugkupot010118.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/pension_gemel/amana-meuzanot.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/xnes-docs/%D7%A4%D7%90%D7%A1%D7%99%D7%91%D7%99-%D7%9E%D7%93%D7%93%D7%99-%D7%9E%D7%A0%D7%99%D7%95%D7%AA.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/xnes-docs/%D7%94%D7%95%D7%93%D7%A2%D7%94-%D7%9C%D7%90%D7%AA%D7%A8-%D7%94%D7%90%D7%99%D7%A0%D7%98%D7%A8%D7%A0%D7%98-%D7%90%D7%A7%D7%A1%D7%9C%D7%A0%D7%A1-%D7%92%D7%9E%D7%9C.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/xnes-docs/190715-tikshur2.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/xnes-docs/mizugkupot012017.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/pension_gemel/pension-to-xnes0619.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/mashkiim/pension-gemel/%D7%9E%D7%95%D7%A0%D7%92%D7%A9-%D7%9E%D7%93%D7%99%D7%A0%D7%99%D7%95%D7%AA-%D7%AA%D7%92%D7%9E%D7%95%D7%9C-2.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/sites/docs/genery/for_new_site/mashkiim/pension-gemel/%D7%90%D7%A7%D7%A1%D7%9C%D7%A0%D7%A1-%D7%A0%D7%A9%D7%95%D7%90%D7%94-%D7%92%D7%9E%D7%9C-%D7%91%D7%A2%D7%9E-%D7%9E%D7%95%D7%A0%D7%92%D7%A9-%D7%9E%D7%93%D7%99%D7%A0%D7%99%D7%95%D7%AA-%D7%AA%D7%92%D7%9E%D7%95%D7%9C-%D7%A0%D7%95%D7%A9%D7%90%D7%99-%D7%9E%D7%A9%D7%A8%D7%94-%D7%95%D7%91%D7%A2%D7%9C%D7%99-%D7%AA%D7%A4%D7%A7%D7%99%D7%93-%D7%9E%D7%A8%D7%9B%D7%96%D7%99-2017-4.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/fnx-tikshur-health-marpe1224.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/finance.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/AlonFNX-Blackrock.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/page-what-is-phoenix-invest1224.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/BLACKROCK-CLALI-AGACH-CHUL-2023.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/Hatava-Begil-Prisha_280223.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/Daf_Mails_Sochnim_201223.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/Doch-Yomi-Sochen-Totzar-Hesber.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/%D7%93%D7%A3-%D7%9E%D7%95%D7%A6%D7%A8-%D7%90%D7%99%D7%A0%D7%98%D7%A8%D7%90%D7%A7%D7%98%D7%99%D7%91.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/Idkun-Mitve-Halvaot-290622.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/Rikuz-Kishurim-Bituach-Haim-281121-2.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/documents/fnx-forms-health-for-agents2024.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/documents/fnx-health-products-2024.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/documents/fnx-display-health-programs2024.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/20210609-compare%20table-ad.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/Tguva-Leclal_101121.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/documents/20210509%20harel%20responed.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/20210107-migdal-respond.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/BDIKOT-TROM-BITUACH.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/ROFE%20MUMCHE%20VIP.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/HITPATCHUT.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/fnx-tor-mahir-mri-ct-2024.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/Dgeshim-hitum-sherut-sochen.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/Alon%20Pensia%20Gemel_291221.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/fnx-pensia-mitcharim-2024.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/Tikrat-HAFKADOT-Gemel_2024.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/Idkun-Tikrot-Sachar-Mashlima-240422.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/Idkun-Tashlum-DIGITALI.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/2-%D7%A4%D7%95%D7%A8%D7%98%D7%9C%20%D7%94%D7%A1%D7%95%D7%9B%D7%A0%D7%99%D7%9D-%D7%93%D7%95%D7%97-%D7%93%D7%9E%D7%99-%D7%A1%D7%9C%D7%99%D7%A7%D7%94-%D7%97%D7%93%D7%A9.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/Doch-Amalot-Hadash-040422.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/Shinui-sisma-portal-sochnim.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/collect-debt-from-client-fnx24.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/fnx-travel-alon-agents24.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/notice-tavlat-mizug-mekifa0524.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/%D7%94%D7%95%D7%93%D7%A2%D7%94-%D7%90%D7%95%D7%93%D7%95%D7%AA-%D7%94%D7%A9%D7%9C%D7%9E%D7%AA-%D7%94%D7%9C%D7%99%D7%9A-%D7%94%D7%9E%D7%99%D7%96%D7%95%D7%92-%D7%91%D7%99%D7%98%D7%95%D7%97.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/230624%D7%98%D7%91%D7%9C%D7%AA_%D7%9E%D7%99%D7%96%D7%95%D7%92%D7%99%D7%9D_%D7%9C%D7%90%D7%AA%D7%A8_%D7%9C%D7%90%D7%97%D7%A8_%D7%9E%D7%99%D7%96%D7%95%D7%92_%D7%A4%D7%A0%D7%A1%D7%99%D7%94_%D7%9E%D7%A7%D7%99%D7%A4%D7%94.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/fnx-excellence-invest-tracks-reform0724.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/tarshim-gemel-reform2024.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/tarshim-ishtalmut-reform2024.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/tarshim-gemel-ashkaa-reform2024.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/tarshim-makifa-reform2024.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/tarshim-mashlima-reform2024.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/tarshim-managers-reform2024.pdf",
+      "error": "HTTP 418"
+    },
+    {
+      "url": "https://www.fnx.co.il/Documents/tarshim-prat-reform2024.pdf",
+      "error": "HTTP 418"
+    }
+  ],
+  "max_pages": 10000,
+  "max_pages_reached": false,
+  "visited_urls": 2623,
+  "queued_urls_remaining": 0,
+  "finished_at": "2026-10-24T20:57:25.643713+00:00",
+  "final_record_count": 872,
+  "output_file": "G:\\אתגר חדש\\server\\data\\pages_crawled.jsonl",
+  "merge_existing_file": "G:\\אתגר חדש\\server\\data\\pages.jsonl",
+  "backup_file": "G:\\אתגר חדש\\server\\data\\pages_crawled.jsonl.bak_20261024_235725"
+}

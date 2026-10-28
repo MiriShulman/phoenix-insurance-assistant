@@ -17,3 +17,15 @@
 # Editor
 .vscode/
 .idea/
+
+# Local semantic-search model and indexes
+server/data/fastembed_cache/
+server/data/chroma_db/
+server/data/chroma_diag_*/
+server/data/chroma_embed_diag_*/
+server/data/chroma_full_diag_*/
+
+# Backup and temporary patch files
+*.bak*
+main_weather_flood_coverage_fix.patch
+server/data/pages_crawled.jsonl

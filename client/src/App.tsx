@@ -54,7 +54,10 @@ function App() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ question: text }),
+        body: JSON.stringify({
+          question: text,
+          history: messages.slice(-8).map(({ role, text }) => ({ role, content: text })),
+        }),
       })
 
       if (!response.ok) {
